@@ -44,7 +44,7 @@ class IMS {
 
       first(length) {
         return length ? value.slice(0, length) : value[0]
-      }
+      },
 
       last(length) {
         return length ? value.slice(-length) : value[value.length - 1]
