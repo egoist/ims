@@ -33,13 +33,15 @@ class IMS {
     const state = this.state
     const value = dotProp.get(this.state, key)
 
-    return {
+    const methods = {
       append(item) {
         dotProp.set(state, key, _append(value, item))
+        return methods
       },
 
       prepend(item) {
         dotProp.set(state, key, _prepend(value, item))
+        return methods
       },
 
       first(length) {
@@ -50,6 +52,8 @@ class IMS {
         return length ? value.slice(-length) : value[value.length - 1]
       }
     }
+
+    return methods
   }
 }
 

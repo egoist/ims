@@ -28,6 +28,6 @@ test('set', t => {
 
 test('append', t => {
   const store = new IMS(sample)
-  store.key('people').append('cris')
-  t.is(store.key('people').last(), 'cris')
+  store.key('people').append('cris').append('lee')
+  t.is(store.key('people').last(), 'lee')
 })
