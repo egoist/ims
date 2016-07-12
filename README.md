@@ -129,7 +129,7 @@ Special conditions: `$gt` `$gte` `$lt` `$lte` `$contain` `$exclude`
 
 #### .findOne([query])
 
-Same as `.find`, but it return a single item only.
+Same as `.find`, but it returns a single item only.
 
 ## License
 
