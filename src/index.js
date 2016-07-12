@@ -30,6 +30,10 @@ function _findOne(arr, query) {
   return _find(arr, query)[0]
 }
 
+/**
+ * @constructor IMS
+ * @param {Object} initialState
+ */
 class IMS {
   constructor(initialState = {}) {
     if (!isObject(initialState)) {
@@ -38,15 +42,30 @@ class IMS {
     this.state = initialState
   }
 
+  /**
+   * Get value by given key path
+   * @param {String} key - Nested dot prop
+   * @return {Any} value
+   */
   get(key) {
     return dotProp.get(this.state, key)
   }
 
+  /**
+   * Set value by given key path
+   * @param {String} key - Nested dot prop
+   * @param {Any} value - New value
+   */
   set(key, value) {
     dotProp.set(this.state, key, value)
     return this
   }
 
+  /**
+   * Manipulate the value of a key
+   * @param {String} key - Nested dot prop
+   * @return {Object} methods
+   */
   key(key) {
     const state = this.state
     const value = dotProp.get(this.state, key)
