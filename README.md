@@ -23,7 +23,7 @@ const store = new IMS({
 store.where('girls').lastOne()
 //=> saber
 
-store.where('girls').append('rem')
+store.where('girls').appendOne('rem')
 //=> ['toka', 'inori', 'saber', 'rem']
 
 store.get('best.girl')
