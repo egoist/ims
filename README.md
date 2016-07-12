@@ -20,18 +20,18 @@ const store = new IMS({
   }
 })
 
-store.key('girls').last()
+store.where('girls').lastOne()
 //=> saber
 
-store.key('girls').append('rem')
+store.where('girls').append('rem')
 //=> ['toka', 'inori', 'saber', 'rem']
 
 store.get('best.girl')
 //=> alice
 
-store.key('girls').skip(1)
+store.where('girls').skip(1)
 //=> ['inori', 'saber']
-store.key('girls').skip(1, 1)
+store.where('girls').skip(1, 1)
 //=> ['inori']
 ```
 

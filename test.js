@@ -29,26 +29,26 @@ test('set', t => {
 
 test('append', t => {
   const store = new IMS(sample)
-  store.key('people').append('cris').append('lee')
-  t.is(store.key('people').last(), 'lee')
+  store.where('people').append('cris').append('lee')
+  t.is(store.where('people').lastOne(), 'lee')
 })
 
 test('findOne', t => {
   const store = new IMS(sample)
-  const kevin = store.key('people').findOne({name: 'kevin'})
+  const kevin = store.where('people').findOne({name: 'kevin'})
   t.is(kevin.name, 'kevin')
 })
 
 test('findOne $gt', t => {
   const store = new IMS(sample)
-  const willson = store.key('people').findOne({$gt: {age: '17'}})
+  const willson = store.where('people').findOne({$gt: {age: '17'}})
   t.is(willson.name, 'willson')
 })
 
 test('skip', t => {
   const store = new IMS(sample)
-  const foo = store.key('nums').skip(3)
-  const bar = store.key('nums').skip(3, 1)
+  const foo = store.where('nums').skip(3)
+  const bar = store.where('nums').skip(3, 1)
   t.deepEqual(foo, [4, 5])
   t.deepEqual(bar, [4])
 })

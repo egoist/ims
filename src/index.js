@@ -66,7 +66,7 @@ class IMS {
    * @param {String} key - Nested dot prop
    * @return {Object} methods
    */
-  key(key) {
+  where(key) {
     const state = this.state
     const value = dotProp.get(this.state, key)
 
@@ -82,11 +82,19 @@ class IMS {
       },
 
       first(length) {
-        return length ? value.slice(0, length) : value[0]
+        return length ? value.slice(0, length) : value
+      },
+
+      firstOne() {
+        return methods.first(1)[0]
       },
 
       last(length) {
-        return length ? value.slice(-length) : value[value.length - 1]
+        return length ? value.slice(-length) : value
+      },
+
+      lastOne() {
+        return methods.last(1)[0]
       },
 
       skip(start = 0, limit) {
