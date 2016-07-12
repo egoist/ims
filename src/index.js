@@ -1,5 +1,5 @@
 import dotProp from 'dot-prop'
-import checkQuery from './check-query'
+import _includes from 'lodash.includes'
 
 function isObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]'
@@ -8,9 +8,7 @@ function isObject(obj) {
 function _find(arr, query = {}) {
   return arr.filter(item => {
     for (const key in query) {
-      if (key[0] === '$') {
-        return checkQuery(item, key, query[key])
-      } else if (item[key] !== query[key]) {
+      if (item[key] !== query[key]) {
         return false
       }
     }
@@ -40,6 +38,9 @@ class IMS {
    * @return {Any} value
    */
   get(key) {
+    if (!key) {
+      return this.state
+    }
     return dotProp.get(this.state, key)
   }
 
@@ -115,6 +116,30 @@ class IMS {
 
       findOne(query) {
         return _findOne(value, query)
+      },
+
+      lt(subKey, subValue) {
+        return value.filter(item => item[subKey] < subValue)
+      },
+
+      lte(subKey, subValue) {
+        return value.filter(item => item[subKey] <= subValue)
+      },
+
+      gt(subKey, subValue) {
+        return value.filter(item => item[subKey] > subValue)
+      },
+
+      gte(subKey, subValue) {
+        return value.filter(item => item[subKey] >= subValue)
+      },
+
+      includes(subKey, subValue) {
+        return value.filter(item => _includes(item[subKey], subValue))
+      },
+
+      excludes(subKey, subValue) {
+        return value.filter(item => !_includes(item[subKey], subValue))
       }
     }
 

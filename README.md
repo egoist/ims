@@ -120,12 +120,7 @@ Give a object of conditions to find matched items in result.
 ```js
 // get all 14 years old guys
 result.find({age: 14})
-
-// get all 14+ years old guys
-result.find({$gt: {age: 14}})
 ```
-
-Special conditions: `$gt` `$gte` `$lt` `$lte` `$contain` `$exclude`
 
 #### .findOne([query])
 

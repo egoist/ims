@@ -39,12 +39,6 @@ test('findOne', t => {
   t.is(kevin.name, 'kevin')
 })
 
-test('findOne $gt', t => {
-  const store = new IMS(sample)
-  const willson = store.where('people').findOne({$gt: {age: '17'}})
-  t.is(willson.name, 'willson')
-})
-
 test('skip', t => {
   const store = new IMS(sample)
   const foo = store.where('nums').skip(3)
