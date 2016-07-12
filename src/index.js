@@ -5,14 +5,6 @@ function isObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]'
 }
 
-function _append(arr, item) {
-  return arr.concat(item)
-}
-
-function _prepend(arr, item) {
-  return [item].concat(arr)
-}
-
 function _find(arr, query = {}) {
   return arr.filter(item => {
     for (const key in query) {
@@ -71,13 +63,29 @@ class IMS {
     const value = dotProp.get(this.state, key)
 
     const methods = {
-      append(item) {
-        dotProp.set(state, key, _append(value, item))
+      append(items) {
+        if (!Array.isArray(items)) {
+          throw new Error('[IMS] .append method requires an array of items')
+        }
+        dotProp.set(state, key, value.concat(items))
         return methods
       },
 
-      prepend(item) {
-        dotProp.set(state, key, _prepend(value, item))
+      appendOne(item) {
+        dotProp.set(state, key, value.concat([item]))
+        return methods
+      },
+
+      prepend(items) {
+        if (!Array.isArray(items)) {
+          throw new Error('[IMS] .prepend method requires an array of items')
+        }
+        dotProp.set(state, key, items.concat(value))
+        return methods
+      },
+
+      prependOne(item) {
+        dotProp.set(state, key, [item].concat(value))
         return methods
       },
 

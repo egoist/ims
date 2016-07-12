@@ -29,7 +29,7 @@ test('set', t => {
 
 test('append', t => {
   const store = new IMS(sample)
-  store.where('people').append('cris').append('lee')
+  store.where('people').appendOne('cris').appendOne('lee')
   t.is(store.where('people').lastOne(), 'lee')
 })
 
