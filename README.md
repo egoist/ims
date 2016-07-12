@@ -8,7 +8,7 @@
 $ npm install --save ims
 ```
 
-## Usage
+## Example
 
 ```js
 const IMS = require('ims')
@@ -28,6 +28,11 @@ store.key('girls').append('rem')
 
 store.get('best.girl')
 //=> alice
+
+store.key('girls').skip(1)
+//=> ['inori', 'saber']
+store.key('girls').skip(1, 1)
+//=> ['inori']
 ```
 
 ## API

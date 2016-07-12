@@ -1,4 +1,5 @@
 import dotProp from 'dot-prop'
+import checkQuery from './check-query'
 
 function isObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]'
@@ -10,6 +11,23 @@ function _append(arr, item) {
 
 function _prepend(arr, item) {
   return [item].concat(arr)
+}
+
+function _find(arr, query = {}) {
+  return arr.filter(item => {
+    for (const key in query) {
+      if (key[0] === '$') {
+        return checkQuery(item, key, query[key])
+      } else if (item[key] !== query[key]) {
+        return false
+      }
+    }
+    return true
+  })
+}
+
+function _findOne(arr, query) {
+  return _find(arr, query)[0]
 }
 
 class IMS {
@@ -50,6 +68,18 @@ class IMS {
 
       last(length) {
         return length ? value.slice(-length) : value[value.length - 1]
+      },
+
+      skip(start = 0, limit) {
+        return limit ? value.slice(start, start + limit) : value.slice(start)
+      },
+
+      find(query) {
+        return _find(value, query)
+      },
+
+      findOne(query) {
+        return _findOne(value, query)
       }
     }
 
